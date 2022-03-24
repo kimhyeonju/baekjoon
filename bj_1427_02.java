@@ -10,7 +10,7 @@ public class bj_1427_02 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] arr = br.readLine().split("");
-        
+
         Arrays.sort(arr, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
