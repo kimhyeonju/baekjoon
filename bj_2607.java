@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 public class bj_2607 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         int n = Integer.parseInt(br.readLine());
         String[] arr = new String[n-1];
         String str1 = br.readLine();
@@ -15,44 +16,44 @@ public class bj_2607 {
         for(int i = 0; i < n-1; i++){
             arr[i] = br.readLine();
         }
-        int[] len = new int[n-1];
+        //int[] len = new int[n-1];
+
+        //for(int i = 0; i < n-1; i++){
+        //    len[i] = arr[i].length();
+        //}// 단어 길이 저장
+
+
+
+        int r=0;
 
         for(int i = 0; i < n-1; i++){
-            len[i] = arr[i].length();
-        }// 단어 길이 저장
 
-        String[] word1 = new String[10];
+            char[] word1 = str1.toCharArray();
+            char[] word2 = arr[i].toCharArray(); // 나머지 단어 하나씩 담음
 
-        for(int i = 0; i < str1_len; i++){
-            word1[i] = str1.split("")[i]; //첫번째 단어 한글자 씩 담음
+            int count = 0;
 
-        }
-
-        String[] word2 = new String[10];
-        int[] kk = new int[n-1];
-
-        for(int r = 0; r < n-1; r++){
-            int k = 0;
-            for(int i = 0; i < arr[r].length(); i++){
-                word2[i] = arr[r].split("")[i]; //단어 한글자 씩 담음
-                for(int j = 0; j < str1_len; j++){
-                    if(!word2[i].equals(word1[j])){
-                        k++;
+            for(int j = 0; j < arr[i].length(); j++){
+                for(int k = 0; k < str1_len; k++){
+                    if(word2[j] == word1[k]){
+                        word2[j] = '1';
+                        word1[k] = '0';
+                        count++;
                     }
                 }
-
             }
-            kk[r] = k;
-
-        }
-        int p = 0;
-        for(int r = 0; r < n-1; r++){
-            if(kk[r] <= (str1_len*arr[r].length())-str1_len){
-                p++;
+            if(str1_len == arr[i].length() && (str1_len == count || str1_len-1== count) ){
+                r++; // 길이가 같음
+            }else if(str1_len - 1 == arr[i].length() && count == arr[i].length()){
+                r++; //길이가 첫 단어가 한글자 더 길때
+            }else if(str1_len + 1 == arr[i].length() && count == arr[i].length()){
+                r++;
             }
-            //System.out.println(kk[r] + "^^");
-            //System.out.println((str1_len*arr[r].length())-str1_len);
         }
-        System.out.println(p);
+        System.out.println(r);
+
+
+
+
     }
 }
